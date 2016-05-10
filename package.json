@@ -2,13 +2,15 @@
   "name": "js-reactor",
   "version": "1.0.0",
   "description": "Minimal, unopinionated boilerplate for starting new React projects",
+  "homepage": "https://www.bigchain.io/",
+  "bugs": "https://github.com/bigchain/js-reactor/issues",
+  "license": "Apache-2.0",
+  "author": "BigchainDB",
+  "main": "src/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bigchaindb/js-reactor.git"
   },
-  "homepage": "https://www.bigchain.io/",
-  "bugs": "https://github.com/bigchain/js-reactor/issues",
-  "main": "src/app.js",
   "scripts": {
     "lint": "eslint ./",
     "build": "NODE_ENV=extract webpack",
@@ -17,8 +19,6 @@
     "start": "NODE_ENV=demo node server.demo.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "BigchainDB",
-  "license": "Apache-2.0",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "babel-cli": "^6.6.5",

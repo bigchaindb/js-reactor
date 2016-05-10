@@ -16,26 +16,26 @@ const PATHS = {
     APP: path.resolve(__dirname, 'src/app.js'),
     BUILD: path.resolve(__dirname, 'build'),
     DIST: path.resolve(__dirname, 'dist'),
-    NODE_MODULES: path.resolve(__dirname, 'node_modules')
+    NODE_MODULES: path.resolve(__dirname, 'node_modules'),
 };
 
 /** EXTERNAL DEFINITIONS INJECTED INTO APP **/
 const DEFINITIONS = {
     'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-    }
+    },
 };
 
 /** PLUGINS **/
 const PLUGINS = [
     new webpack.DefinePlugin(DEFINITIONS),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
 ];
 
 const EXTRACT_PLUGINS = [
     new ExtractTextPlugin(PRODUCTION ? 'styles.min.css' : 'styles.css', {
         allChunks: true
-    })
+    }),
 ];
 
 const PROD_PLUGINS = [
@@ -50,7 +50,7 @@ const PROD_PLUGINS = [
     new webpack.LoaderOptionsPlugin({
         debug: false,
         minimize: true
-    })
+    }),
 ];
 
 if (EXTRACT || PRODUCTION) {
@@ -69,7 +69,7 @@ const CSS_LOADER = combineLoaders([
             sourceMap: true
         }
     },
-    { loader: 'postcss' }
+    { loader: 'postcss' },
 ]);
 
 
@@ -79,7 +79,7 @@ const config = {
 
     output: {
         filename: PRODUCTION ? 'bundle.min.js' : 'bundle.js',
-        path: PRODUCTION ? PATHS.DIST : PATHS.BUILD
+        path: PRODUCTION ? PATHS.DIST : PATHS.BUILD,
     },
 
     debug: !PRODUCTION,
@@ -88,7 +88,7 @@ const config = {
 
     resolve: {
         extensions: ['', '.js', '.jsx'],
-        modules: ['node_modules'] // Don't use absolute path here to allow recursive matching
+        modules: ['node_modules'], // Don't use absolute path here to allow recursive matching
     },
 
     plugins: PLUGINS,
@@ -100,19 +100,19 @@ const config = {
                 exclude: [PATHS.NODE_MODULES],
                 loader: 'babel',
                 query: {
-                    cacheDirectory: true
-                }
+                    cacheDirectory: true,
+                },
             },
             {
                 test: /\.css$/,
                 exclude: [PATHS.NODE_MODULES],
                 loader: PRODUCTION || EXTRACT ? ExtractTextPlugin.extract('style', CSS_LOADER)
-                                              : `style!${CSS_LOADER}`
-            }
-        ]
+                                              : `style!${CSS_LOADER}`,
+            },
+        ],
     },
 
-    postcss: [autoPrefixer()]
+    postcss: [autoPrefixer()],
 };
 
 module.exports = config;

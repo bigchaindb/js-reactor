@@ -8,7 +8,7 @@
   },
   "homepage": "https://www.bigchain.io/",
   "bugs": "https://github.com/bigchain/js-reactor/issues",
-  "main": "",
+  "main": "src/app.js",
   "scripts": {
     "lint": "eslint ./",
     "build": "NODE_ENV=extract webpack",

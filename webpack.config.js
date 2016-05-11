@@ -19,23 +19,27 @@ const PATHS = {
     NODE_MODULES: path.resolve(__dirname, 'node_modules'),
 };
 
+
 /** EXTERNAL DEFINITIONS INJECTED INTO APP **/
 const DEFINITIONS = {
     'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+
+        // Add additional environment variable definitions
     },
 };
+
 
 /** PLUGINS **/
 const PLUGINS = [
     new webpack.DefinePlugin(DEFINITIONS),
     new webpack.NoErrorsPlugin(),
-];
 
 const EXTRACT_PLUGINS = [
     new ExtractTextPlugin(PRODUCTION ? 'styles.min.css' : 'styles.css', {
         allChunks: true
     }),
+    // Add additional base plugins
 ];
 
 const PROD_PLUGINS = [
@@ -51,6 +55,8 @@ const PROD_PLUGINS = [
         debug: false,
         minimize: true
     }),
+
+    // Add additional production plugins
 ];
 
 if (EXTRACT || PRODUCTION) {
@@ -70,6 +76,8 @@ const JS_LOADER = combineLoaders([
             cacheDirectory: true,
         },
     },
+
+    // Add additional JS loaders
 ]);
 
 const CSS_LOADER = combineLoaders([
@@ -80,6 +88,8 @@ const CSS_LOADER = combineLoaders([
         }
     },
     { loader: 'postcss' },
+
+    // Add additional style / CSS loaders
 ]);
 
 // Add additional loaders to handle other formats (ie. images, svg)
@@ -96,6 +106,8 @@ const LOADERS = [
         loader: PRODUCTION || EXTRACT ? ExtractTextPlugin.extract('style', CSS_LOADER)
                                       : `style!${CSS_LOADER}`,
     },
+
+    // Add additional loader specifications
 ];
 
 

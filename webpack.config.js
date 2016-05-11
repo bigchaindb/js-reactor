@@ -35,10 +35,6 @@ const PLUGINS = [
     new webpack.DefinePlugin(DEFINITIONS),
     new webpack.NoErrorsPlugin(),
 
-const EXTRACT_PLUGINS = [
-    new ExtractTextPlugin(PRODUCTION ? 'styles.min.css' : 'styles.css', {
-        allChunks: true
-    }),
     // Add additional base plugins
 ];
 
@@ -59,8 +55,14 @@ const PROD_PLUGINS = [
     // Add additional production plugins
 ];
 
+const EXTRACT_CSS_PLUGIN = new ExtractTextPlugin(
+    PRODUCTION ? 'styles.min.css' : 'styles.css', {
+        allChunks: true
+    }
+);
+
 if (EXTRACT || PRODUCTION) {
-    PLUGINS.push(...EXTRACT_PLUGINS);
+    PLUGINS.push(EXTRACT_CSS_PLUGIN);
 }
 
 if (PRODUCTION) {

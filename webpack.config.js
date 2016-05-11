@@ -61,7 +61,17 @@ if (PRODUCTION) {
     PLUGINS.push(...PROD_PLUGINS);
 }
 
-/** MODULES **/
+
+/** LOADERS **/
+const JS_LOADER = combineLoaders([
+    {
+        loader: 'babel',
+        query: {
+            cacheDirectory: true,
+        },
+    },
+]);
+
 const CSS_LOADER = combineLoaders([
     {
         loader: 'css',
@@ -71,6 +81,22 @@ const CSS_LOADER = combineLoaders([
     },
     { loader: 'postcss' },
 ]);
+
+// Add additional loaders to handle other formats (ie. images, svg)
+
+const LOADERS = [
+    {
+        test: /\.jsx?$/,
+        exclude: [PATHS.NODE_MODULES],
+        loader: JS_LOADER,
+    },
+    {
+        test: /\.css$/,
+        exclude: [PATHS.NODE_MODULES],
+        loader: PRODUCTION || EXTRACT ? ExtractTextPlugin.extract('style', CSS_LOADER)
+                                      : `style!${CSS_LOADER}`,
+    },
+];
 
 
 /** EXPORTED WEBPACK CONFIG **/
@@ -94,22 +120,7 @@ const config = {
     plugins: PLUGINS,
 
     module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                exclude: [PATHS.NODE_MODULES],
-                loader: 'babel',
-                query: {
-                    cacheDirectory: true,
-                },
-            },
-            {
-                test: /\.css$/,
-                exclude: [PATHS.NODE_MODULES],
-                loader: PRODUCTION || EXTRACT ? ExtractTextPlugin.extract('style', CSS_LOADER)
-                                              : `style!${CSS_LOADER}`,
-            },
-        ],
+        loaders: LOADERS,
     },
 
     postcss: [autoPrefixer()],

@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "eslint ./",
-    "build": "NODE_ENV=extract webpack",
+    "build": "rimraf ./build && NODE_ENV=extract webpack",
     "build:dist": "rimraf ./dist && NODE_ENV=production webpack -p",
     "clean": "rimraf ./build ./dist",
     "start": "NODE_ENV=demo node server.demo.js",

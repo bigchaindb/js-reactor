@@ -122,6 +122,18 @@ Here are some other nice things you can include, if desired.
 We've kept it simple with npm scripts, but if you like Gulp / Grunt / etc, feel free to integrate
 Webpack with them.
 
+#### Using Environment Variables
+
+Webpack provides the [define plugin](https://github.com/webpack/docs/wiki/list-of-plugins#defineplugin)
+to inject free variables into your builds.
+
+Initially, `NODE_ENV` is already defined and passed into your builds, so you can use it by
+referencing `process.env.NODE_ENV`. This is a great way to handle logic surrounding debug and
+production modes, as Webpack can do dead code elimination during production builds
+([see the docs](https://github.com/webpack/docs/wiki/list-of-plugins#defineplugin)).
+
+To inject more variables like this, add definitions to the [DEFINITIONS object](./webpack.config.js#L24).
+
 #### Sass / SCSS
 
 Install some of the Sass utilities:
@@ -131,7 +143,7 @@ npm install -D node-sass sass-loader
 ```
 
 And add [sass-loader](https://github.com/jtangelder/sass-loader) to your Webpack loaders, with the
-test `/\.s[ac]ss$/`:
+test `/\.s[ac]ss$/`, using these settings:
 
 ```js
 {
@@ -166,7 +178,7 @@ const CSS_LOADER = combineLoaders([
 ]);
 ```
 
-And now replace the `css` loader's test (`test: /\.css$/`), with `test: /\.s[ac]ss$/`.
+And now replace the `css` loader specification's test (`test: /\.css$/`), with `test: /\.s[ac]ss$/`.
 
 #### LESS
 
@@ -365,6 +377,16 @@ See the [usage](https://github.com/shakacode/bootstrap-loader#usage) and
 [configuration](https://github.com/shakacode/bootstrap-loader#common-options-for-bootstrap-3-and-4)
 docs for more information.
 
+#### Developing with npm link
+
+Due to the way `npm link` works, it can cause your bundles to have duplications (for example, if
+both your project and the `link`ed library use React, it'll be included twice). Add aliases using
+[config.resolve.alias](https://webpack.github.io/docs/configuration.html#resolve-alias) to have all
+imports matching the alias to resolve to the path you specify.
+
+This is especially important if you plan to keep the `link`s for publishing, but useful while
+developing to make builds faster.
+
 
 Good to Know
 ------------
@@ -379,6 +401,9 @@ version bump on their webpack peer-dependency to support Webpack 2*).
 We include our own ESLint config, based off our [Javascript Styleguide](https://github.com/ascribe/javascript),
 which is itself based off of the [Airbnb Javascript Styleguide](https://github.com/airbnb/javascript).
 If you find you don't like the settings, you can change them through the [.eslintrc config](./.eslintrc).
+
+There are a TON of [plugins](https://webpack.github.io/docs/list-of-plugins.html) and
+[loaders](https://webpack.github.io/docs/list-of-loaders.html), so go exploring!
 
 
 Yet Another React Boilerplate???

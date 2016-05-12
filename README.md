@@ -284,7 +284,7 @@ Install [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)
 [url-loader](https://github.com/webpack/url-loader):
 
 ```bash
-npm install -D url-loader image-webpack-loader
+npm install -D file-loader url-loader image-webpack-loader
 ```
 
 Add an image loader configuration to your Webpack configuration:

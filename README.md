@@ -11,15 +11,22 @@ Getting started
 
 #### Initialize a new repository
 
-Just `git clone` this repo, `rm -rf .git` inside the repo, and `git init` to start your new project
-using this boilerplate as a base.
+Just clone or fork this repo, `rm -rf .git` inside the repo, and `git init` to start your new
+project using this boilerplate as a base.
 
 More literally:
 
 ```bash
+# If you'd like, fork js-reactor and clone your fork locally
+$ git clone git@github.com:<forked-by-user>/js-reactor.git your-project
+
+# Or, just straight up clone this repo
 $ git clone git@github.com:bigchaindb/js-reactor.git your-project
+
+# And reinitialize the repo
 $ cd your-project
 $ rm -rf .git && git init
+$ git add . && git commit -m "Initial commit"
 ```
 
 This will clone this repository into `your-project/` and initialize a new git repository for you to
@@ -423,6 +430,7 @@ use them. And also because we make tons of demos.
 
 Acknowledgements
 ----------------
+
 Special thanks to the BigchainDB/ascribe.io team for their insights and code contributions:
 
 @diminator, @r-marques, @vrde, @ttmc, @rhsimplex, @sbellem, @TimDaub

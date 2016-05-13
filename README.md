@@ -32,7 +32,7 @@ the box, so you can immediately see what you're building.
 
 ```bash
 $ npm install
-$ npm run start # By default runs on localhost:3000
+$ npm start     # By default runs on localhost:3000
 
 $ vim src/app.js
 ```

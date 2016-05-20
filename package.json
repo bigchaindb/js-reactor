@@ -46,6 +46,7 @@
     "webpack-dev-server": "^2.0.0-beta"
   },
   "dependencies": {
+    "core-js": "^2.4.0",
     "react": "^15.0.2",
     "react-dom": "^15.0.2"
   }

@@ -395,6 +395,171 @@ imports matching the alias to resolve to the path you specify.
 This is especially important if you plan to keep the `link`s for publishing, but useful while
 developing to make builds faster.
 
+#### Developing libraries
+
+Although this boilerplate wasn't set up with library creation in mind, much of it can still be
+recycled if you're developing something reusable across multiple projects. While there are no hard
+rules, there are typically a few nice-to-haves in terms of generated outputs:
+
+* A transpiled version - *for older build systems*
+* A transpiled version with ES6 import syntax - *for newer build systems that understand the import
+  syntax*
+* A minified bundle, in UMD format - *for drop-in script tags and initial ease of use*
+
+**Note**: Users will always have the option to directly include your un-built version if they use a
+module bundler and configure it to build your package properly. Whenever possible, this should be
+the recommended approach as it gives users full control over what they import.
+
+The rest of this section will assume you want to generate all three of these outputs.
+
+##### Normal transpiled version:
+
+First, replace `es2015` from the top-level `presets` value in your `.babelrc` with
+`es2015-no-commonjs` (making sure to install `babel-preset-es2015-no-commonjs`; this isn't strictly
+necessary here, but it does make generating the ES6 version much easier in terms of configuration),
+so your configuration should now look something like this:
+
+```js
+{
+    ...
+    'presets': ['react', 'es2015-no-commonjs'], // use es2015-no-commonjs instead of es2015
+    ...
+}
+```
+
+Remove the `transform-runtime` plugin from the top-level `plugins` value, as each of the files in
+the unbundled version should be self contained (otherwise, using `transform-runtime` will leave
+imports to `babel-runtime` in the transpiled version, forcing the user to also use `babel-runtime`).
+
+Then, set up a new environment in your `.babelrc` (making sure to install
+`babel-plugin-transform-es2015-modules-commonjs`, which adds back the CommonJS transformation to
+this environment), like so:
+
+```js
+{
+    ...
+    'env': {
+        ...
+        'cjs': {
+            'plugins': ['transform-es2015-modules-commonjs']
+        },
+        ...
+    },
+    ...
+}
+```
+
+And finally, add the build script to your `package.json` (replacing `./lib` with your code
+directory):
+
+```bash
+NODE_ENV=production BABEL_ENV=cjs babel ./lib -d cjs
+```
+
+Which will transpile the javascript files in `lib/` into `cjs/` using the `cjs` babel environment
+you just set up.
+
+**Note**: If you are using inlined environment variables (like `process.env.NODE_ENV`) in your code,
+you will have to install and add `babel-plugin-transform-inline-environment-variables` for babel to
+inline these (since initially we only inline these through webpack). Your top-level `plugins` value
+should look something like:
+
+```js
+{
+    ...
+    'plugins': [
+        ...
+        'transform-inline-environment-variables',
+        ...
+    ],
+    ...
+}
+```
+
+##### ES6 transpiled version:
+
+Following from above, because you've switched to using `babel-preset-es2015-no-commonjs`,
+generating the ES6 version doesn't require any further configuration and can be done using just:
+
+```bash
+NODE_ENV=production babel ./lib -d es6
+```
+
+##### Bundled version:
+
+This version relies on using webpack to bundle everything together into a single file, similar to
+how the boilerplate is set up initially. You should be careful about including everything, making
+sure that the necessary polyfills (through `babel-runtime`, not `babel-polyfill`!) are bundled as
+you can't assume anything about the user's environment if they just drop the bundled script into a
+script tag.
+
+Again, set up a new babel environment that will re-add the `transform-runtime` plugin (since we
+can now bundle the `babel-runtime` dependencies in):
+
+```js
+{
+    ...
+    'env': {
+        ...
+        'bundle': {
+            'plugins': [
+                ['transform-runtime', {
+                    'polyfill': true
+                } ]
+            ]
+        },
+        ...
+    },
+    ...
+}
+```
+
+**Note**: Make sure `babel-runtime` is installed as a devDependency!
+
+Now you'll need to change a few things in your webpack configuration. Assuming your entry point and
+output paths are OK, you should add a few things to `config.output` to let webpack know you want a
+library:
+
+```js
+const config = {
+    ...
+    output: {
+        ...,
+        library: 'your-library-name',
+        libraryTarget: 'umd',
+        ...
+    },
+    ...
+}
+```
+
+And assuming you don't want to bundle React and other shared
+[peer-dependencies](https://nodejs.org/en/blog/npm/peer-dependencies/), move `react`, `react-dom`,
+and etc to be dev and peer dependencies in your `package.json` and add an `externals` pattern
+to `config` to tell webpack to avoid adding these packages in the final bundle:
+
+```js
+const config = {
+    ...
+    externals: PRODUCTION ? [/^react(-dom|-addons.*)?$/] : null,
+    ...
+}
+```
+
+Finally, the build script is just:
+
+```bash
+NODE_ENV=production BABEL_ENV=bundle webpack -p
+```
+
+##### What about other assets?
+
+If you have scss, css, or other assets, it's best to process them into directly usable forms (ie.
+already preprocessed css, optimized assets) and then output them into either a single directory or
+with each output separately. If your javascript directly requires some of these assets, for example
+a component requiring its own stylesheet, you'll probably want to structure the built assets in a
+similar fashion as the pre-built assets.
+
 
 Good to Know
 ------------

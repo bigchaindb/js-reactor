@@ -32,6 +32,9 @@ const compiler = webpack(config);
 const server = new WebpackDevServer(compiler, {
     publicPath: config.output.publicPath,
     contentBase: './demo',
+    historyApiFallback: {
+        index: config.output.publicPath
+    },
     hot: true,
     noInfo: true,
     stats: { colors: true }

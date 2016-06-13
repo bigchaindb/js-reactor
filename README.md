@@ -453,7 +453,7 @@ And finally, add the build script to your `package.json` (replacing `./lib` with
 directory):
 
 ```bash
-NODE_ENV=production BABEL_ENV=cjs babel ./lib -d cjs
+cross-env NODE_ENV=production BABEL_ENV=cjs babel ./lib -d cjs
 ```
 
 Which will transpile the javascript files in `lib/` into `cjs/` using the `cjs` babel environment
@@ -482,7 +482,7 @@ Following from above, because you've switched to using `babel-preset-es2015-no-c
 generating the ES6 version doesn't require any further configuration and can be done using just:
 
 ```bash
-NODE_ENV=production babel ./lib -d es6
+cross-env NODE_ENV=production babel ./lib -d es6
 ```
 
 ##### Bundled version:
@@ -549,7 +549,7 @@ const config = {
 Finally, the build script is just:
 
 ```bash
-NODE_ENV=production BABEL_ENV=bundle webpack -p
+cross-env NODE_ENV=production BABEL_ENV=bundle webpack -p
 ```
 
 ##### What about other assets?

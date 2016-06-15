@@ -89,7 +89,7 @@ What's Included
     * [See .eslintrc config](./.eslintrc)
 * [React hot reloading](https://github.com/gaearon/babel-plugin-react-transform)
 
-#### Initial App Structure
+#### Initial app structure
 
 A small barebones app is provided in `src/app.js`. The initial Webpack config expects this to be the
 root of the app and uses it as its [entry point](https://webpack.github.io/docs/configuration.html#entry).
@@ -97,7 +97,7 @@ root of the app and uses it as its [entry point](https://webpack.github.io/docs/
 The demo app (`demo/app.js`) just imports the app at `src/app.js`, which, when run, will be
 rendered into `demo/index.html` through the `#js-reactor-app` element.
 
-#### Npm Scripts
+#### Npm scripts
 
 Pretty basic stuff:
 
@@ -106,7 +106,7 @@ Pretty basic stuff:
 * `npm run build:dist`: Build project with production settings into `dist/`
 * `npm run lint`: Lint entire project
 
-#### Production Settings
+#### Production settings
 
 Some standard fare:
 
@@ -125,12 +125,12 @@ config](./webpack.config.js) was kept rather barebones. It can only understand J
 
 Here are some other nice things you can include, if desired.
 
-#### Build Systems
+#### Build systems
 
 We've kept it simple with npm scripts, but if you like Gulp / Grunt / etc, feel free to integrate
 Webpack with them.
 
-#### Using Environment Variables
+#### Using environment variables
 
 Webpack provides the [define plugin](https://github.com/webpack/docs/wiki/list-of-plugins#defineplugin)
 to inject free variables into your builds.
@@ -141,6 +141,13 @@ production modes, as Webpack can do dead code elimination during production buil
 ([see the docs](https://github.com/webpack/docs/wiki/list-of-plugins#defineplugin)).
 
 To inject more variables like this, add definitions to the [DEFINITIONS object](./webpack.config.js#L24).
+
+#### Browser support
+
+See the [browserlist](./browserlist) for the default list of supported browsers (used by Autoprefixer).
+
+If you'd like to include support for IE8 and lower, you should also disable UglifyJSPlugin's
+`screw_ie8` flag in the webpack configuration.
 
 #### Sass / SCSS
 
@@ -240,7 +247,7 @@ const CSS_LOADER = combineLoaders([
 Note the comments above on `importLoaders`: this value should always match the number of loaders
 chained after the `css-loader` in order for imported files to be processed by the later loaders.
 
-#### HTML Generation
+#### HTML generation
 
 You can have Webpack generate the HTML file that'll import and render your app with plugins. We've
 had success with [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin).

@@ -567,6 +567,19 @@ with each output separately. If your javascript directly requires some of these 
 a component requiring its own stylesheet, you'll probably want to structure the built assets in a
 similar fashion as the pre-built assets.
 
+##### What about building for node?
+
+Oh boy.
+
+At the very least, you should change your webpack configuration to have `target: 'node'` (or even
+pass back an array of configurations each with their own target and output location).
+
+If you're not building anything that requires browser-specific APIs, this should be all that you
+need to do. However, if you are and need to have varying builds depending on the target, you're
+probably going to want to specify what you want to be including by using a root entry point for each
+target. You should set your `package.json`'s `main` field to point to your node entry, and the
+`browser` field to point to the web entry.
+
 
 Good to Know
 ------------

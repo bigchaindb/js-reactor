@@ -130,6 +130,8 @@ const config = {
 
     devtool: PRODUCTION ? '#source-map' : '#inline-source-map',
 
+    target: 'web',
+
     resolve: {
         extensions: ['', '.js', '.jsx'],
         modules: ['node_modules'], // Don't use absolute path here to allow recursive matching

@@ -138,7 +138,9 @@ to inject free variables into your builds.
 Initially, `NODE_ENV` is already defined and passed into your builds, so you can use it by
 referencing `process.env.NODE_ENV`. This is a great way to handle logic surrounding debug and
 production modes, as Webpack can do dead code elimination during production builds
-([see the docs](https://github.com/webpack/docs/wiki/list-of-plugins#defineplugin)).
+([see the docs](https://github.com/webpack/docs/wiki/list-of-plugins#defineplugin)). To make things
+more streamline, you may also consider using [warning](https://github.com/BerkeleyTrue/warning) and
+[babel-plugin-dev-expression](https://github.com/4Catalyzer/babel-plugin-dev-expression).
 
 To inject more variables like this, add definitions to the [DEFINITIONS object](./webpack.config.js#L24).
 
@@ -460,28 +462,11 @@ And finally, add the build script to your `package.json` (replacing `./lib` with
 directory):
 
 ```bash
-cross-env NODE_ENV=production BABEL_ENV=cjs babel ./lib -d cjs
+cross-env BABEL_ENV=cjs babel ./lib -d cjs
 ```
 
 Which will transpile the javascript files in `lib/` into `cjs/` using the `cjs` babel environment
 you just set up.
-
-**Note**: If you are using inlined environment variables (like `process.env.NODE_ENV`) in your code,
-you will have to install and add `babel-plugin-transform-inline-environment-variables` for babel to
-inline these (since initially we only inline these through webpack). Your top-level `plugins` value
-should look something like:
-
-```js
-{
-    ...
-    'plugins': [
-        ...
-        'transform-inline-environment-variables',
-        ...
-    ],
-    ...
-}
-```
 
 ##### ES6 transpiled version:
 
@@ -489,7 +474,7 @@ Following from above, because you've switched to using `babel-preset-es2015-no-c
 generating the ES6 version doesn't require any further configuration and can be done using just:
 
 ```bash
-cross-env NODE_ENV=production babel ./lib -d es6
+cross-env babel ./lib -d es6
 ```
 
 ##### Bundled version:
@@ -558,6 +543,10 @@ Finally, the build script is just:
 ```bash
 cross-env NODE_ENV=production BABEL_ENV=bundle webpack -p
 ```
+
+Note the use of `NODE_ENV=production` here since the bundled package will usually be used without a
+module bundler and therefore needs to have any development checks dependent on `NODE_ENV` be
+stripped away before usage.
 
 ##### What about other assets?
 

@@ -560,15 +560,44 @@ similar fashion as the pre-built assets.
 
 Oh boy.
 
-At the very least, you should change your webpack configuration to have `target: 'node'` (or even
-pass back an array of configurations each with their own target and output location).
+Well, for the most part, your CommonJS export should be enough unless you are using any
+browser-specific APIs (ie. the DOM, browser globals, etc). Node users should never have to import
+from your bundled version and should just use your package's default CommonJS export.
 
-If you're not building anything that requires browser-specific APIs, this should be all that you
-need to do. However, if you are and need to have varying builds depending on the target, you're
-probably going to want to specify what you want to be including by using a root entry point for each
-target. You should set your `package.json`'s `main` field to point to your node entry, and the
-`browser` field to point to the web entry.
+However, if you are building something that uses browser-specific APIs but would like to strip those
+away depending on the target, then you'll probably want to specify what you'd like to include by
+using different root entry points for each target. Remember to set your `package.json`'s `main`
+field to point to your built node output, and the `browser` field to point to the web output to let
+the user's module bundler pick the right version accordingly.
 
+**Note**: If you'd like to support Node's import convention of allowing a single export to be
+immediately usable by an importer, ie. `var foo = require('foo')()` where `foo` exports a single
+function, you'll need to add `babel-plugin-add-module-exports` to your `.babelrc`'s CommonJS build
+(before the `transform-es2015-modules-commonjs`). If you've been following this document, your
+`.bablerc`'s `cjs` entry should then look like:
+
+```js
+{
+    ...
+    'env': {
+        ...
+        'cjs': {
+            'plugins': [
+                'add-module-exports',
+                'transform-es2015-modules-commonjs'
+            ]
+        },
+        ...
+    },
+    ...
+}
+```
+
+As a final touch, you may also want to change your webpack configuration to have `target: 'node'`
+(if you have multiple targets, you can pass back an array of configurations each with their own
+target, ie. web and node, and output location). This seems to cause build errors for some packages
+though, so your leverage with this may vary; usually just telling Node users to use your CommonJS
+export is enough.
 
 Good to Know
 ------------

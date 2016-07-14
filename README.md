@@ -1,5 +1,9 @@
 JS Reactor
 ==========
+[![Dependency Status](https://david-dm.org/bigchaindb/js-reactor.svg)](https://david-dm.org/bigchaindb/js-reactor)
+[![devDependency Status](https://david-dm.org/bigchaindb/js-reactor/dev-status.svg)](https://david-dm.org/bigchaindb/js-reactor#info=devDependencies)
+[![Code style](https://img.shields.io/badge/code%20style-ascribe-brightgreen.svg)](https://github.com/ascribe/javascript)
+[![Join the chat at https://gitter.im/bigchaindb/bigchaindb](https://badges.gitter.im/bigchaindb/bigchaindb.svg)](https://gitter.im/bigchaindb/bigchaindb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Minimalistic boilerplate to power your next React app.
 

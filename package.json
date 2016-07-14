@@ -40,14 +40,14 @@
     "eslint-plugin-import": "^1.9.2",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "=2.0.0-beta.1",
     "postcss-loader": "^0.9.1",
     "react-transform-hmr": "^1.0.4",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
-    "webpack": "^2.1.0-beta.7",
+    "webpack": "=2.1.0-beta.17",
     "webpack-combine-loaders": "^2.0.0",
-    "webpack-dev-server": "^2.1.0-beta.0"
+    "webpack-dev-server": "=2.1.0-beta.0"
   },
   "dependencies": {
     "core-js": "^2.4.0",

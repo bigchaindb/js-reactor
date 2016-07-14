@@ -20,9 +20,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
+    "autoprefixer": "^6.3.7",
     "babel-cli": "^6.10.1",
-    "babel-eslint": "^6.0.5",
+    "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-object-assign": "^6.8.0",
@@ -30,20 +30,20 @@
     "babel-plugin-transform-react-display-name": "^6.8.0",
     "babel-plugin-transform-runtime": "^6.9.0",
     "babel-preset-es2015-no-commonjs": "0.0.2",
-    "babel-preset-react": "^6.5.0",
+    "babel-preset-react": "^6.11.1",
     "babel-runtime": "^6.9.2",
-    "cross-env": "^1.0.8",
+    "cross-env": "^2.0.0",
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
     "eslint": "^2.13.1",
     "eslint-config-ascribe-react": "^1.0.1",
-    "eslint-plugin-import": "^1.9.2",
-    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-import": "^1.10.3",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
     "eslint-plugin-react": "^5.2.2",
     "extract-text-webpack-plugin": "=2.0.0-beta.1",
     "postcss-loader": "^0.9.1",
     "react-transform-hmr": "^1.0.4",
-    "rimraf": "^2.5.2",
+    "rimraf": "^2.5.3",
     "style-loader": "^0.13.1",
     "webpack": "=2.1.0-beta.17",
     "webpack-combine-loaders": "^2.0.0",
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "core-js": "^2.4.0",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
   }
 }

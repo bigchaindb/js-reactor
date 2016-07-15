@@ -604,6 +604,25 @@ target, ie. web and node, and output location). This seems to cause build errors
 though, so your leverage with this may vary; usually just telling Node users to use your CommonJS
 export is enough.
 
+##### Publishing to NPM
+
+If you've set up your `package.json` with [your own settings](#additional-setup), you're mostly good
+to go. There's just a few settings left to include in there:
+
+* [main](https://docs.npmjs.com/files/package.json#main) - Your main, CommonJS, export. If you've
+  been following this section, this will be `lib/index.js`.
+* [jsnext:main](https://github.com/rollup/rollup/wiki/jsnext:main) - Your ES6 export. If you've been
+  following this section, this will be `es6/index.js`. Note that this isn't official in terms of NPM
+  yet, but most modern module bundlers already accept this field or can be configured to.
+* [files](https://docs.npmjs.com/files/package.json#files) - Files to be included for NPM. Make sure
+  to include the folders that hold your built versions; if you've been following this section,
+  you'll want to include `bundle`, `es6`, and `lib`.
+* [directories](https://docs.npmjs.com/files/package.json#directories) - Package directories; the
+  most important one here is the `lib` entry, which, if you've been following this section, will be
+  `lib/`.
+* [keywords](https://docs.npmjs.com/files/package.json#keywords) - Keywords to find your package on
+  NPM. You're probably the expert here ;).
+
 Good to Know
 ------------
 

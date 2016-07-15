@@ -607,16 +607,17 @@ export is enough.
 Good to Know
 ------------
 
-At the moment, we're using the newest Webpack beta (2.0.0-beta6) because [Webpack 2 comes with a
+At the moment, we're using the newest Webpack beta (2.1.0-beta.17) because [Webpack 2 comes with a
 lot of great features](https://gist.github.com/sokra/27b24881210b56bbaff7), especially
 tree-shaking. Although it's in beta, we've been using it for a while and have had no stability
 issues. Although there are some package warnings, most 1.x plugins and loaders will work seamlessly
 with no changes required (*read as: we have yet to encounter any plugin requiring more than just a
-version bump on their webpack peer-dependency to support Webpack 2*).
+version bump on their webpack peer-dependency to support Webpack 2, aside from the 1.x extract-text
+plugin on webpack 2.1.0-beta.16+*). Just make sure to use the most recent plugin version.
 
 We include our own ESLint config, based off our [Javascript Styleguide](https://github.com/ascribe/javascript),
 which is itself based off of the [Airbnb Javascript Styleguide](https://github.com/airbnb/javascript).
-If you find you don't like the settings, you can change them through the [.eslintrc config](./.eslintrc).
+If you find you don't like the settings, you can change them through the [.eslintrc.json config](./.eslintrc.json).
 
 There are a TON of [plugins](https://webpack.github.io/docs/list-of-plugins.html) and
 [loaders](https://webpack.github.io/docs/list-of-loaders.html), so go exploring!

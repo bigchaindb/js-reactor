@@ -90,7 +90,8 @@ What's Included
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
     * [See browserlist for initial browser support](./browserlist)
 * [ESLint](http://eslint.org/) + [ESLint-plugin-react](https://github.com/yannickcr/eslint-plugin-react)
-    * [See .eslintrc config](./.eslintrc)
+    * Based on [eslint-config-ascribe-react](https://github.com/ascribe/javascript/tree/master/packages/eslint-config-ascribe-react);
+      [see .eslintrc.json config](./.eslintrc.json)
 * [React hot reloading](https://github.com/gaearon/babel-plugin-react-transform)
 
 #### Initial app structure

@@ -479,7 +479,7 @@ Following from above, because you've switched to using `babel-preset-es2015-no-c
 generating the ES6 version doesn't require any further configuration and can be done using just:
 
 ```bash
-cross-env babel ./lib -d es6
+babel ./lib -d es6
 ```
 
 ##### Bundled version:

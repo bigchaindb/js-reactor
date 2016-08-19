@@ -106,7 +106,7 @@ rendered into `demo/index.html` through the `#js-reactor-app` element.
 
 Pretty basic stuff:
 
-* `npm run start`: Start Webpack dev server with hot reloading
+* `npm start`: Start Webpack dev server with hot reloading
 * `npm run build`: Build project into `build/`
 * `npm run build:dist`: Build project with production settings into `dist/`
 * `npm run lint`: Lint entire project
@@ -256,8 +256,11 @@ chained after the `css-loader` in order for imported files to be processed by th
 
 #### HTML generation
 
-You can have Webpack generate the HTML file that'll import and render your app with plugins. We've
-had success with [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin).
+Using plugins, you can have Webpack generate the HTML file that will render your app -- allowing you
+to avoid hard coding the inclusion of any built files. We've had success with [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin).
+
+If you do this, you may also be interested in setting a more appropriate [`output.publicPath`] in your
+Webpack configuration, as well as modifying the default `publicPath` that's set by the [demo server](./server.demo.js#L27).
 
 #### Assets
 

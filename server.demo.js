@@ -33,7 +33,7 @@ const server = new WebpackDevServer(compiler, {
     publicPath: config.output.publicPath,
     contentBase: './demo',
     historyApiFallback: {
-        index: config.output.publicPath
+        index: '/'
     },
     hot: true,
     noInfo: true,

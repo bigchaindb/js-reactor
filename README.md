@@ -108,6 +108,7 @@ Pretty basic stuff:
 
 * `npm start`: Start Webpack dev server with hot reloading
 * `npm run build`: Build project into `build/`
+* `npm run build:watch`: Build project into `build/` and watch for changes
 * `npm run build:dist`: Build project with production settings into `dist/`
 * `npm run lint`: Lint entire project
 

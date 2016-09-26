@@ -7,7 +7,8 @@ JS Reactor
 
 Minimalistic boilerplate to power your next React app.
 
-[See what's provided](#whats-included) and [why we bothered](#yet-another-react-boilerplate).
+[See what's provided](#whats-included), [what to do next](optional-addons--tips), and
+[why we bothered](#yet-another-react-boilerplate).
 
 
 Getting started
@@ -129,7 +130,20 @@ In the interest of Keeping Things Simple~~<sup>TM</sup>~~, the initial [webpack
 config](./webpack.config.js) was kept rather barebones. It can only understand Javascript files
 (`.js` or `.jsx`) and CSS files (`.css`).
 
-Here are some other nice things you can include, if desired.
+Here are some other nice things you can include, if desired:
+
+* [Build systems](#build-systems)
+* [Using environment variables](#using-environment-variables)
+* [Browser support](#browser-support)
+* [Sass / SCSS](#sass--scss)
+* [LESS](#less)
+* [PostCSS](#postcss)
+* [CSS Modules](#css-modules)
+* [HTML generation](#html-generation)
+* [Assets](#assets)
+* [Bootstrap](#bootstrap)
+* [Developing with `npm link`](#developing-with-npm-link)
+* [Developing libraries](#developing-libraries)
 
 #### Build systems
 

@@ -432,26 +432,14 @@ The rest of this section will assume you want to generate all three of these out
 
 ##### Normal transpiled version:
 
-First, replace `es2015` from the top-level `presets` value in your `.babelrc` with
-`es2015-no-commonjs` (making sure to install `babel-preset-es2015-no-commonjs`; this isn't strictly
-necessary here, but it does make generating the ES6 version much easier in terms of configuration),
-so your configuration should now look something like this:
+Starting with the default [.babelrc](./.babelrc), remove the `transform-runtime` plugin from the
+`plugins` array. This is done to keep the unbundled builds decoupled from babel, as
+`transform-runtime` adds `babel-runtime` imports in the transpiled code and thereby forces your
+users to also depend on `babel-runtime`.
 
-```js
-{
-    ...
-    'presets': ['react', 'es2015-no-commonjs'], // use es2015-no-commonjs instead of es2015
-    ...
-}
-```
-
-Remove the `transform-runtime` plugin from the top-level `plugins` value, as each of the files in
-the unbundled version should be self contained (otherwise, using `transform-runtime` will leave
-imports to `babel-runtime` in the transpiled version, forcing the user to also use `babel-runtime`).
-
-Then, set up a new environment in your `.babelrc` (making sure to install
-`babel-plugin-transform-es2015-modules-commonjs`, which adds back the CommonJS transformation to
-this environment), like so:
+Then, install `babel-plugin-transform-es2015-modules-commonjs` (to add back the CommonJS
+transformation we've turned from the default `babel-preset-latest`) and add a new environment in
+your `.babelrc` like so:
 
 ```js
 {
@@ -467,23 +455,23 @@ this environment), like so:
 }
 ```
 
-And finally, add the build script to your `package.json` (replacing `./lib` with your code
-directory):
+Finally, to actually build the code:
 
 ```bash
-cross-env BABEL_ENV=cjs babel ./lib -d cjs
+cross-env BABEL_ENV=cjs babel <code-dir> -d cjs
 ```
 
-Which will transpile the javascript files in `lib/` into `cjs/` using the `cjs` babel environment
-you just set up.
+This will transpile the javascript files in `<code-dir>` into `cjs/` using the `cjs` babel
+environment you just set up. If you plan to be doing this regularly, it's probably worth putting
+into your `package.json`'s `scripts` section.
 
 ##### ES6 transpiled version:
 
-Following from above, because you've switched to using `babel-preset-es2015-no-commonjs`,
-generating the ES6 version doesn't require any further configuration and can be done using just:
+If you've kept the default `[['latest', { es2015: { modules: false } }]]` preset, generating the ES6
+version doesn't require any further configuration and can be done using just:
 
 ```bash
-babel ./lib -d es6
+babel <code-dir> -d es6
 ```
 
 ##### Bundled version:

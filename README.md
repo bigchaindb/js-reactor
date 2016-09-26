@@ -77,7 +77,7 @@ Requires Node 5+. Install [nvm](https://github.com/creationix/nvm) if you haven'
 What's Included
 ---------------
 
-* [Babel 6](http://babeljs.io/)
+* [Babel 6](http://babeljs.io/), with ES2017 support
     * [See .babelrc config](./.babelrc)
 * [Webpack 2](https://webpack.github.io/)
     * [See webpack.config.js config](./webpack.config.js)

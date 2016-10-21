@@ -335,7 +335,7 @@ const PNG_LOADER = combineLoaders([
     {
         loader: 'url',
         query: {
-            limit: 100000
+            limit: 100000,
             mimetype: 'image/png',
         },
     },

@@ -70,7 +70,7 @@ if (EXTRACT || PRODUCTION) {
 }
 
 if (PRODUCTION) {
-    PLUGINS.push(...PROD_PLUGINS);
+    PLUGINS.push(PROD_PLUGINS);
 }
 
 
@@ -94,11 +94,38 @@ const CSS_LOADER = combineLoaders([
         }
     },
     { loader: 'postcss' },
-
+    {
+        loader: 'sass',
+        query: {
+            precision: '8',
+            outputStyle: 'expanded',
+            sourceMap: true
+        }
+    },
     // Add additional style / CSS loaders
 ]);
 
 // Add additional loaders to handle other formats (ie. images, svg)
+const SVG_LOADER = combineLoaders([
+    { loader: 'babel' },
+    { loader: 'svg-react' },
+    // Can't supply the query using the query object as json formats aren't supported
+    { loader: 'image-webpack?{ svgo: { plugins: [{ removeTitle: true }, { cleanupIDs: false }] } }' },
+]);
+
+// Define a PNG loader that will be inlined as a Data Url if it's under 100kb
+const PNG_LOADER = combineLoaders([
+    {
+        loader: 'url',
+        query: {
+            limit: 100000,
+            mimetype: 'image/png',
+        },
+    },
+    // Can't supply the query using the query object as json formats aren't supported
+    // NOTE: These are super awesome optimization levels, you should dial them down if the build is slow
+    { loader: 'image-webpack?{ optimizationLevel: 7, pngquant: { quality: "65-90", speed: 1 } }' },
+]);
 
 const LOADERS = [
     {
@@ -107,10 +134,20 @@ const LOADERS = [
         loader: JS_LOADER,
     },
     {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/,
         exclude: [PATHS.NODE_MODULES],
         loader: PRODUCTION || EXTRACT ? ExtractTextPlugin.extract('style', CSS_LOADER)
                                       : `style!${CSS_LOADER}`,
+    },
+    {
+        test: /\.svg$/,
+        exclude: [PATHS.NODE_MODULES],
+        loader: SVG_LOADER
+    },
+    {
+        test: /\.png$/,
+        exclude: [PATHS.NODE_MODULES],
+        loader: PNG_LOADER
     },
 
     // Add additional loader specifications

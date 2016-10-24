@@ -88,6 +88,11 @@ What's Included
         * [Production build settings](#production-settings)
     * [Dev server](https://github.com/webpack/webpack-dev-server)
         * [See server.demo.js config](./server.demo.js)
+    * **Note**: This project is currently pegged to Webpack 2.1.0-beta.17. [*Significant*](https://github.com/webpack/webpack/releases)
+      changes have since been made to the betas (e.g. `loaders` renamed to `rules`, etc) and
+      the provided configuration and notes will likely not immediately work with the most recent
+      betas. As Webpack2 begins to stabilize, we'll upgrade accordingly (pull requests are always
+      welcome though :wink:!).
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
     * [See browserlist for initial browser support](./browserlist)
 * [ESLint](http://eslint.org/) + [ESLint-plugin-react](https://github.com/yannickcr/eslint-plugin-react)
@@ -629,16 +634,20 @@ to go. There's just a few settings left to include in there:
 * [keywords](https://docs.npmjs.com/files/package.json#keywords) - Keywords to find your package on
   NPM. You're probably the expert here ;).
 
+
 Good to Know
 ------------
 
-At the moment, we're using the newest Webpack beta (2.1.0-beta.17) because [Webpack 2 comes with a
-lot of great features](https://gist.github.com/sokra/27b24881210b56bbaff7), especially
-tree-shaking. Although it's in beta, we've been using it for a while and have had no stability
-issues. Although there are some package warnings, most 1.x plugins and loaders will work seamlessly
-with no changes required (*read as: we have yet to encounter any plugin requiring more than just a
-version bump on their webpack peer-dependency to support Webpack 2, aside from the 1.x extract-text
-plugin on webpack 2.1.0-beta.16+*). Just make sure to use the most recent plugin version.
+At the moment, we're pegged to a backwards-compatible Webpack2 beta (2.1.0-beta.17) because [Webpack
+2 comes with a lot of great features](https://gist.github.com/sokra/27b24881210b56bbaff7),
+especially tree-shaking. Although it's in beta, we've been using it for a while and have had no
+stability issues. Although there are some package warnings, most 1.x plugins and loaders will work
+seamlessly with no changes required (*read as: we have yet to encounter any plugin requiring more
+than just a version bump on their Webpack peer-dependency to support Webpack 2, aside from the 1.x
+extract-text plugin on Webpack 2.1.0-beta.16+*). Just make sure to use the most recent plugin
+version. Note that since beta.17, Webpack2 has rethought a number of pieces in its configuration and
+our findings may not be true for the most recent betas; we'll upgrade the provided configuration and
+additional notes as things stabilize.
 
 We include our own ESLint config, based off our [Javascript Styleguide](https://github.com/ascribe/javascript),
 which is itself based off of the [Airbnb Javascript Styleguide](https://github.com/airbnb/javascript).

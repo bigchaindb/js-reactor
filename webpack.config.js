@@ -70,7 +70,7 @@ if (EXTRACT || PRODUCTION) {
 }
 
 if (PRODUCTION) {
-    PLUGINS.push(PROD_PLUGINS);
+    PLUGINS.push(...PROD_PLUGINS);
 }
 
 

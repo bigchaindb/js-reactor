@@ -1,5 +1,7 @@
 JS Reactor
 ==========
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/bigchaindb/js-reactor.svg)](https://greenkeeper.io/)
 [![Dependency Status](https://david-dm.org/bigchaindb/js-reactor.svg)](https://david-dm.org/bigchaindb/js-reactor)
 [![devDependency Status](https://david-dm.org/bigchaindb/js-reactor/dev-status.svg)](https://david-dm.org/bigchaindb/js-reactor#info=devDependencies)
 [![Code style](https://img.shields.io/badge/code%20style-ascribe-brightgreen.svg)](https://github.com/ascribe/javascript)
